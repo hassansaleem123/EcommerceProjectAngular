@@ -1,0 +1,25 @@
+<!-- Product Listing -->
+<div *ngFor="let product of products">
+  <div>
+    {{ product.name }} - {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+    - {{ product.discount }}% <br />
+    <button (click)="deleteProduct(product.productID)">Delete</button>
+    <button (click)="selectProduct(product)">Edit</button>
+  </div>
+</div>
+
+<!-- Product Form -->
+<form>
+  <label>Name:</label>
+  <input [(ngModel)]="selectedProduct.name" name="name" required />
+
+  <label>Price:</label>
+  <input [(ngModel)]="selectedProduct.price" name="price" type="number" />
+
+  <label>Discount:</label>
+  <input [(ngModel)]="selectedProduct.discount" name="discount" type="number" />
+
+  <button (click)="addProduct()" [disabled]="isUpdating()">Add Product</button>
+  <button (click)="updateProduct()" [disabled]="!isUpdating()">Update Product</button>
+  <button (click)="clearForm()">Clear</button>
+</form>
